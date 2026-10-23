@@ -1,0 +1,50 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+/storage/logs/*.log
+/*.log
+
+# Cache
+/bootstrap/cache/*.php
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Uploads
+/storage/app/private/*
+!/storage/app/private/.gitkeep
+
+# Exports
+/storage/app/exports/*
+!/storage/app/exports/.gitkeep
+
+# Temp
+/storage/app/temp/*
+!/storage/app/temp/.gitkeep
+
+# Plantillas (keep but ignore if large)
+/storage/app/plantillas/*.mdb
+
+# PHPUnit
+.phpunit.result.cache
+
+# IDE/Editor
+*.orig
+*.bak
