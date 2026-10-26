@@ -42,6 +42,9 @@ Thumbs.db
 # Plantillas (keep but ignore if large)
 /storage/app/plantillas/*.mdb
 
+# Bases y artefactos COM/ACE de trabajo H0 (copias de BD/, nunca en el repo)
+/storage/rem/
+
 # Base de datos SQLite del scaffold (la BD real es MySQL/XAMPP)
 /database/*.sqlite
 
