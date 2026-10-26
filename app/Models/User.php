@@ -4,14 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RolUsuario;
+use Filament\Panel;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +54,41 @@ class User extends Authenticatable
             'intentos_fallidos' => 'int',
             'bloqueado_hasta' => 'datetime',
         ];
+    }
+
+    /**
+     * RN-001/MOD-06/MOD-14 — Acceso a paneles por rol:
+     * ROL-ESTABLECIMIENTO → Portal (/portal); roles internos → Backoffice (/backoffice).
+     * Cuentas inactivas no acceden a ningún panel.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if (! $this->activo) {
+            return false;
+        }
+
+        return match ($panel->getId()) {
+            'portal' => $this->isEstablecimiento(),
+            'backoffice' => $this->esInterno(),
+            default => false,
+        };
+    }
+
+    /**
+     * T-019 — El rol del dominio (users.rol, SPECS ROL-*) se refleja como
+     * rol spatie/Shield con el mismo nombre (modo modular 1:1).
+     */
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            if ($user->rol) {
+                $spatie = \Spatie\Permission\Models\Role::firstOrCreate([
+                    'name' => $user->rol->value,
+                    'guard_name' => 'web',
+                ]);
+                $user->assignRole($spatie);
+            }
+        });
     }
 
     /** DAT-03: MFA obligatorio en producción para admin/supervisor (TEC-15/RN-014). */
