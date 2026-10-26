@@ -42,6 +42,13 @@ Thumbs.db
 # Plantillas (keep but ignore if large)
 /storage/app/plantillas/*.mdb
 
+# Base de datos SQLite del scaffold (la BD real es MySQL/XAMPP)
+/database/*.sqlite
+
+# Bases de datos del sistema anterior (ValidadorRem) — SOLO local, nunca commitear
+# Origen: copias de referencia de la instalación actual del servicio (dato sensible + tamaños grandes)
+/BD/
+
 # PHPUnit
 .phpunit.result.cache
 
