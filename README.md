@@ -1,66 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# WebCargaREM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema Web de **Carga y Validación REM** (Reporte de Establecimientos y Municipales) para el **Servicio de Salud Osorno**, que reemplaza la aplicación de escritorio CargaRem/ValidadorRem (Access/Excel) por una plataforma web con carga estandarizada, validación automática, trazabilidad y generación del archivo de consolidado para Minsal.
 
-## About Laravel
+> Proyecto en desarrollo (MVP dirigido por `specs/TASK.md`). La documentación funcional completa está en [`specs/SPECS.md`](specs/SPECS.md).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Componente | Tecnología |
+|---|---|
+| Backend | PHP 8.2 · Laravel 12 |
+| Paneles Admin | Filament 4 · bezhansalleh/filament-shield (roles/permisos spatie) |
+| Base de datos | MariaDB 10.4 / MySQL 8 (utf8mb4. Tablas legacy Access vía migración COM/ACE read-only) |
+| Autenticación | Sesiones + MFA TOTP obligatorio en producción para Admin/Supervisor (`EnforceMfa`) |
+| Auditoría | spatie/laravel-activitylog (`recepcion_eventos`, activity log) |
+| Tests | PHPUnit / Pest-less (33 tests feature+unit al 2026-10-26) |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Arquitectura en una mirada
 
-## Learning Laravel
+- **Backoffice** (`/backoffice`): usuarios internos Admin / Supervisor / Operador. Gestión de ventanas de carga, recepciones, validación, soporte, administración.
+- **Portal** (`/portal`): cuentas de establecimientos (titular/suplente). Calendario, carga de series, historial y cumplimiento.
+- **Aislamiento por servicio/establecimiento**: global scope `servicioActivo()` en todo dato de negocio (RN-001/RN-010).
+- **Motor de validación** (FASE C): paridad comprobable contra el ValidadorRem original, leyendo los catálogos del `Global.mdb` (`cat_diccionario`, `cat_thojas`, `cat_excep`, etc.).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Puesta en marcha (desarrollo local)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Requisitos: PHP 8.2 con extensión COM/ACE disponible (XAMPP en Windows), MariaDB/MySQL y Composer.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+composer install
+cp .env.example .env          # configurar DB credenciales y REM_ADMIN_PASSWORD
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+php artisan test              # suite completa
+```
 
-## Laravel Sponsors
+Preferir `C:\Users\Lenovo\AppData\Local\Temp\opencode` para artefactos temporales en Windows (`%TEMP%` genérico no está aprobado).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Credenciales de desarrollo (seeder)
 
-### Premium Partners
+| Usuario | Rol | Panel |
+|---|---|---|
+| `admin@redsaludosorno.cl` | Admin | backoffice |
+| `supervisor@redsaludosorno.cl` | Supervisor | backoffice |
+| `operador@redsaludosorno.cl` | Operador | backoffice |
+| `titular.101123@saludaldia.cl` | Establecimiento (Hospital Base 101123) | portal |
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Password: valor de `REM_ADMIN_PASSWORD` en `.env` (default dev `cambiar-ya-2026`; **rotar en producción**). Recovery de password/MFA: [`docs/OPERACION.md`](docs/OPERACION.md).
 
-## Contributing
+## Datos privados que **no** se publican
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- `BD/` — archivos `.mdb` legacy de producción (~700 MB: `Global.mdb`, `DatosSERIE*`, `Control*`). **Excluidos del repositorio.**
+- `.env` — credenciales reales. Solo se versiona `.env.example`.
 
-## Code of Conduct
+## Estructura relevante
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+app/
+  Auth/TOTPProvider.php          # Interfaz TOTP (implementación: PD-PLAN-01)
+  Http/Middleware/EnforceMfa.php # Retiene Admin/Supervisor sin TOTP en producción
+  Enums/, Models/, Filament/
+database/
+  migrations/                    # 22 migraciones de esquema (DAT-*)
+  seeders/
+    CatalogosSeeder.php          # Importa catálogos desde BD/Global.mdb (COM/ACE, resumen de conteos)
+    FeriadosSeeder.php           # 51 feriados 2025–2027 (RN-042) — editable por Admin
+    DatabaseSeeder.php           # Roles Shield, catálogos, series, usuarios
+docs/OPERACION.md                # Recovery de accesos (LIM-021/022)
+specs/SPECS.md · TASK.md         # Requisitos y plan de tareas (fases A–I)
+poc/                             # Herramientas de evidencia: introspección (Global.mdb OpenSchema)
+```
 
-## Security Vulnerabilities
+## Estado del proyecto
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Fase | Alcance | Estado |
+|---|---|---|
+| A — Base | Esquema, roles, paneles, MFA, seeders | ✅ T-001..T-026 (T-001/T-005 parcial: extensiones servidor reales) |
+| C — Motor validación | Paridad con ValidadorRem | ⏳ próxima |
+| D–I | Consolidación, Minsal, FTP, impl. | ⏳ |
 
-## License
+Bloqueos externos conocidos (no frenan desarrollo): T-041 (Excels REM reales), T-063 (mes límite), T-075 (API feriados/feriadosapp prov.), T-098 (FTP), PD-PLAN-01 (librería TOTP concreta).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Seguridad
+
+Cualquier hallazgo de seguridad debe reportarse al equipo del S.S. Osorno (canal interno REM) — no abrir issue público.
+
+## Licencia
+
+Interno del Servicio de Salud Osorno.

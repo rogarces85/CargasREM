@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use \App\Http\Middleware\EnforceMfa;
 use Filament\Http\Middleware\Authenticate;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -65,6 +66,7 @@ class BackofficePanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                EnforceMfa::class,
             ]);
     }
 }

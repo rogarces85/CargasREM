@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('anio');
             $table->string('texto_prestacion', 255);
             $table->string('hoja', 5);
-            $table->string('serie', 2);
+            $table->string('serie', 20);
             $table->unsignedSmallInteger('posicion');
             $table->string('tipo_dato', 15);
             $table->unsignedSmallInteger('linea')->nullable();
@@ -27,9 +27,10 @@ return new class extends Migration
         });
 
         // DAT-18 cat_thojas — hojas/rangos por serie/año (RN-014)
+        // serie(20): las series llegan crudas del catálogo Minsal/Global.mdb ("SERIE BM1")
         Schema::create('cat_thojas', function (Blueprint $table) {
             $table->id();
-            $table->string('serie', 2);
+            $table->string('serie', 20);
             $table->string('hoja', 5);
             $table->unsignedSmallInteger('anio');
             $table->unsignedTinyInteger('mes')->nullable();
@@ -38,16 +39,17 @@ return new class extends Migration
         });
 
         // DAT-19 cat_excep — celdas ignoradas por prestación/hoja/serie (RN-016)
+        // col_excep es VARCHAR en el origen ("1,7" = lista de columnas ignoradas, RN-016/RN-017)
         Schema::create('cat_excep', function (Blueprint $table) {
             $table->id();
             $table->string('codigo_prestacion', 50);
             $table->unsignedTinyInteger('mes');
             $table->unsignedSmallInteger('anio');
             $table->string('hoja', 5);
-            $table->string('serie', 2);
+            $table->string('serie', 20);
             $table->unsignedSmallInteger('posicion')->nullable();
             $table->string('tipo_dato', 15)->nullable();
-            $table->unsignedTinyInteger('col_excep')->nullable();
+            $table->string('col_excep', 50)->nullable();
             $table->index(['serie', 'anio'], 'idx_excep_serie_anio');
         });
 

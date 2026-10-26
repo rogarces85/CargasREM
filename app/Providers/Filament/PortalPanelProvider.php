@@ -7,6 +7,7 @@ use App\Filament\Portal\Pages\CargarSeries;
 use App\Filament\Portal\Pages\Cumplimiento;
 use App\Filament\Portal\Pages\Dashboard as PortalDashboard;
 use App\Filament\Portal\Pages\Historial;
+use App\Http\Middleware\EnforceMfa;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -66,6 +67,7 @@ class PortalPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                EnforceMfa::class,
             ]);
     }
 }
