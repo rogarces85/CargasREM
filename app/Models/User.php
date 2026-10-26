@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RolUsuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +22,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol',
+        'establecimiento_id',
+        'tipo_cuenta',
+        'mfa_habilitado',
+        'activo',
     ];
 
     /**
@@ -31,18 +37,40 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'mfa_secret',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'rol' => RolUsuario::class,
+            'mfa_habilitado' => 'boolean',
+            'activo' => 'boolean',
+            'intentos_fallidos' => 'int',
+            'bloqueado_hasta' => 'datetime',
         ];
+    }
+
+    /** DAT-03: MFA obligatorio en producción para admin/supervisor (TEC-15/RN-014). */
+    public function requiereMfa(): bool
+    {
+        return $this->rol->esInterno();
+    }
+
+    public function isEstablecimiento(): bool
+    {
+        return $this->rol === RolUsuario::Establecimiento;
+    }
+
+    public function esInterno(): bool
+    {
+        return $this->rol->esInterno();
+    }
+
+    public function establecimiento()
+    {
+        return $this->belongsTo(Establecimiento::class);
     }
 }
