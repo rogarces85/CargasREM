@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "4.*",
+        "guzzlehttp/guzzle": "^7.16",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "phpoffice/phpspreadsheet": "^5.10"

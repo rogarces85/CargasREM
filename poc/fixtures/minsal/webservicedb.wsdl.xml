@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://intradeis.minsal.cl/WebService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://intradeis.minsal.cl/WebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://intradeis.minsal.cl/WebService/">
+      <s:element name="datos">
+        <s:complexType />
+      </s:element>
+      <s:element name="datosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="datosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="servicio">
+        <s:complexType />
+      </s:element>
+      <s:element name="servicioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="servicioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="diccionario">
+        <s:complexType />
+      </s:element>
+      <s:element name="diccionarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="diccionarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Thoja">
+        <s:complexType />
+      </s:element>
+      <s:element name="ThojaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ThojaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Version">
+        <s:complexType />
+      </s:element>
+      <s:element name="VersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VersionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Excep">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExcepResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExcepResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ColExcep">
+        <s:complexType />
+      </s:element>
+      <s:element name="ColExcepResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ColExcepResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="datosSoapIn">
+    <wsdl:part name="parameters" element="tns:datos" />
+  </wsdl:message>
+  <wsdl:message name="datosSoapOut">
+    <wsdl:part name="parameters" element="tns:datosResponse" />
+  </wsdl:message>
+  <wsdl:message name="servicioSoapIn">
+    <wsdl:part name="parameters" element="tns:servicio" />
+  </wsdl:message>
+  <wsdl:message name="servicioSoapOut">
+    <wsdl:part name="parameters" element="tns:servicioResponse" />
+  </wsdl:message>
+  <wsdl:message name="diccionarioSoapIn">
+    <wsdl:part name="parameters" element="tns:diccionario" />
+  </wsdl:message>
+  <wsdl:message name="diccionarioSoapOut">
+    <wsdl:part name="parameters" element="tns:diccionarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ThojaSoapIn">
+    <wsdl:part name="parameters" element="tns:Thoja" />
+  </wsdl:message>
+  <wsdl:message name="ThojaSoapOut">
+    <wsdl:part name="parameters" element="tns:ThojaResponse" />
+  </wsdl:message>
+  <wsdl:message name="VersionSoapIn">
+    <wsdl:part name="parameters" element="tns:Version" />
+  </wsdl:message>
+  <wsdl:message name="VersionSoapOut">
+    <wsdl:part name="parameters" element="tns:VersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExcepSoapIn">
+    <wsdl:part name="parameters" element="tns:Excep" />
+  </wsdl:message>
+  <wsdl:message name="ExcepSoapOut">
+    <wsdl:part name="parameters" element="tns:ExcepResponse" />
+  </wsdl:message>
+  <wsdl:message name="ColExcepSoapIn">
+    <wsdl:part name="parameters" element="tns:ColExcep" />
+  </wsdl:message>
+  <wsdl:message name="ColExcepSoapOut">
+    <wsdl:part name="parameters" element="tns:ColExcepResponse" />
+  </wsdl:message>
+  <wsdl:message name="datosHttpGetIn" />
+  <wsdl:message name="datosHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="servicioHttpGetIn" />
+  <wsdl:message name="servicioHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="diccionarioHttpGetIn" />
+  <wsdl:message name="diccionarioHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ThojaHttpGetIn" />
+  <wsdl:message name="ThojaHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="VersionHttpGetIn" />
+  <wsdl:message name="VersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ExcepHttpGetIn" />
+  <wsdl:message name="ExcepHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ColExcepHttpGetIn" />
+  <wsdl:message name="ColExcepHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="datosHttpPostIn" />
+  <wsdl:message name="datosHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="servicioHttpPostIn" />
+  <wsdl:message name="servicioHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="diccionarioHttpPostIn" />
+  <wsdl:message name="diccionarioHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ThojaHttpPostIn" />
+  <wsdl:message name="ThojaHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="VersionHttpPostIn" />
+  <wsdl:message name="VersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ExcepHttpPostIn" />
+  <wsdl:message name="ExcepHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ColExcepHttpPostIn" />
+  <wsdl:message name="ColExcepHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceDBSoap">
+    <wsdl:operation name="datos">
+      <wsdl:input message="tns:datosSoapIn" />
+      <wsdl:output message="tns:datosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <wsdl:input message="tns:servicioSoapIn" />
+      <wsdl:output message="tns:servicioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <wsdl:input message="tns:diccionarioSoapIn" />
+      <wsdl:output message="tns:diccionarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <wsdl:input message="tns:ThojaSoapIn" />
+      <wsdl:output message="tns:ThojaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <wsdl:input message="tns:VersionSoapIn" />
+      <wsdl:output message="tns:VersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <wsdl:input message="tns:ExcepSoapIn" />
+      <wsdl:output message="tns:ExcepSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <wsdl:input message="tns:ColExcepSoapIn" />
+      <wsdl:output message="tns:ColExcepSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceDBHttpGet">
+    <wsdl:operation name="datos">
+      <wsdl:input message="tns:datosHttpGetIn" />
+      <wsdl:output message="tns:datosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <wsdl:input message="tns:servicioHttpGetIn" />
+      <wsdl:output message="tns:servicioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <wsdl:input message="tns:diccionarioHttpGetIn" />
+      <wsdl:output message="tns:diccionarioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <wsdl:input message="tns:ThojaHttpGetIn" />
+      <wsdl:output message="tns:ThojaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <wsdl:input message="tns:VersionHttpGetIn" />
+      <wsdl:output message="tns:VersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <wsdl:input message="tns:ExcepHttpGetIn" />
+      <wsdl:output message="tns:ExcepHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <wsdl:input message="tns:ColExcepHttpGetIn" />
+      <wsdl:output message="tns:ColExcepHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceDBHttpPost">
+    <wsdl:operation name="datos">
+      <wsdl:input message="tns:datosHttpPostIn" />
+      <wsdl:output message="tns:datosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <wsdl:input message="tns:servicioHttpPostIn" />
+      <wsdl:output message="tns:servicioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <wsdl:input message="tns:diccionarioHttpPostIn" />
+      <wsdl:output message="tns:diccionarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <wsdl:input message="tns:ThojaHttpPostIn" />
+      <wsdl:output message="tns:ThojaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <wsdl:input message="tns:VersionHttpPostIn" />
+      <wsdl:output message="tns:VersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <wsdl:input message="tns:ExcepHttpPostIn" />
+      <wsdl:output message="tns:ExcepHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <wsdl:input message="tns:ColExcepHttpPostIn" />
+      <wsdl:output message="tns:ColExcepHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceDBSoap" type="tns:WebServiceDBSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="datos">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/datos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/servicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/diccionario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/Thoja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/Version" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/Excep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <soap:operation soapAction="http://intradeis.minsal.cl/WebService/ColExcep" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceDBSoap12" type="tns:WebServiceDBSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="datos">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/datos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/servicio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/diccionario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/Thoja" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/Version" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/Excep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <soap12:operation soapAction="http://intradeis.minsal.cl/WebService/ColExcep" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceDBHttpGet" type="tns:WebServiceDBHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="datos">
+      <http:operation location="/datos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <http:operation location="/servicio" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <http:operation location="/diccionario" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <http:operation location="/Thoja" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <http:operation location="/Version" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <http:operation location="/Excep" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <http:operation location="/ColExcep" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceDBHttpPost" type="tns:WebServiceDBHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="datos">
+      <http:operation location="/datos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="servicio">
+      <http:operation location="/servicio" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="diccionario">
+      <http:operation location="/diccionario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Thoja">
+      <http:operation location="/Thoja" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Version">
+      <http:operation location="/Version" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Excep">
+      <http:operation location="/Excep" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ColExcep">
+      <http:operation location="/ColExcep" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceDB">
+    <wsdl:port name="WebServiceDBSoap" binding="tns:WebServiceDBSoap">
+      <soap:address location="https://cargasrem.minsal.cl/webservice/webservicedb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceDBSoap12" binding="tns:WebServiceDBSoap12">
+      <soap12:address location="https://cargasrem.minsal.cl/webservice/webservicedb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceDBHttpGet" binding="tns:WebServiceDBHttpGet">
+      <http:address location="https://cargasrem.minsal.cl/webservice/webservicedb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceDBHttpPost" binding="tns:WebServiceDBHttpPost">
+      <http:address location="https://cargasrem.minsal.cl/webservice/webservicedb.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
